@@ -1,0 +1,42 @@
+{
+  "database": {
+    "user": "postgres",
+    "name": "utnianos",
+    "port": "5432",
+    "password": "postgres"
+  },
+  "page": {
+    "name": "Morpheus",
+    "description": "This page is amazing!"
+  },
+  "serverConfig": {
+    "port":"8888",
+    "notifications_limit": "8",
+    "notifications_enabled": "True"
+  },
+  "security": {
+    "serveHttps": "false",
+    "cookie_secret": "supercalifragilisticexpialidous",
+    "ssl_cert":"",
+    "ssl_key":"",
+    "validate_user_email": "False"
+  },
+  "account": {
+    "maxLoginTries": "4",
+    "loginDelayTimeStep": "15",
+    "lockoutTimeWindow": "30"
+  },
+  "logFile": "",
+  "jwt": {
+    "secret": "secret",
+    "algorithm": "HS256",
+    "expiration": "3600"
+  },
+  "email": {
+    "fromAddress": "no-reply@morpheus",
+    "mailTemplate": "templates/useractivation.html",
+    "subject": "Welcome to morpheus!",
+    "host": "localhost",
+    "port": "25"
+  }
+}
