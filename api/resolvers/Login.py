@@ -18,21 +18,18 @@ def get_context(config_path):
       'db_session': db_session
     }
 
-class UserDict(graphene.ObjectType):
-   id = graphene.Int(),
-   avatar = graphene.String(),
-   username = graphene.String(),
-   fullname = graphene.String(),
-   email = graphene.String(),
-   link = graphene.String()
-
 class Login(graphene.Mutation):
     class Arguments:
       username = graphene.String()
       password = graphene.String()
 
     ok = graphene.Boolean()
-    user = UserDict()
+    id = graphene.Int()
+    avatar = graphene.String()
+    username = graphene.String()
+    fullname = graphene.String()
+    email = graphene.String()
+    link = graphene.String()
 
     def mutate(root, info, username, password):
         config_file = '../../config.json'
@@ -45,9 +42,15 @@ class Login(graphene.Mutation):
         if user is None:
            ok = False
 
-        print(user)
-
-        return Login(ok=ok, user=user)
+        return Login(
+          ok=ok,
+          id=int(user['user']['id']),
+          avatar=user['user']['avatar'],
+          username=user['user']['username'],
+          fullname=user['user']['fullname'],
+          email=user['user']['email'],
+          link=user['user']['link']
+        )
 
 
 def try_login_user(username, password, context):
