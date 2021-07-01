@@ -32,6 +32,9 @@ class Login(graphene.Mutation):
     link = graphene.String()
 
     def mutate(root, info, username, password):
+
+        #print(info.context)
+
         config_file = '../../config.json'
         config_file_path = path.join(path.dirname(__file__), config_file)
         context = get_context(config_file_path)
@@ -40,7 +43,7 @@ class Login(graphene.Mutation):
         user = try_login_user(username, password, context)
 
         if user is None:
-           ok = False
+           raise Exception('404', 'User not found.')
 
         return Login(
           ok=ok,
@@ -168,7 +171,7 @@ def authenticate_user(username, password, context):
         #logger.info("User exists and is: " + username)
         #logger.info(user.failed_attempts)
         user_exists = True
-        delay_time(login_delay, user.failed_attempts)  # Wait an ammount of time proportional to the number of failed attempts.
+        #delay_time(login_delay, user.failed_attempts)  # Wait an ammount of time proportional to the number of failed attempts.
         check_pass = check_password(password, user.password, user.salt)
 
         # User tried to login the maximum number of allowed tries.
