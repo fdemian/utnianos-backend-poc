@@ -168,13 +168,14 @@ def authenticate_user(username, password, context):
         #logger.info("User exists and is: " + username)
         #logger.info(user.failed_attempts)
         user_exists = True
-        #delay_time(login_delay, user.failed_attempts)  # Wait an ammount of time proportional to the number of failed attempts.
+        delay_time(login_delay, user.failed_attempts)  # Wait an ammount of time proportional to the number of failed attempts.
         check_pass = check_password(password, user.password, user.salt)
 
         # User tried to login the maximum number of allowed tries.
-        #if user_is_locked(db_session, user, lockout_time):
+        if user_is_locked(db_session, user, lockout_time):
+          print(user_is_locked)
           #logger.info("User is locked: " + username)
-        #  return None
+          return None
 
         """
          If the user is valid and it exists verify that the password was input correctly.
