@@ -12,6 +12,7 @@ graphene-sqlalchemy = "*"
 alembic = "*"
 psycopg2-binary = "*"
 pyjwt = "*"
+flask-graphql-auth = "*"
 
 [dev-packages]
 

@@ -6,6 +6,16 @@ from .models import (
  User as UserModel
 )
 from api.resolvers.Login import Login
+from api.resolvers.AuthMutation import AuthMutation
+
+"""
+ class Mutation(graphene.ObjectType):
+    auth = AuthMutation.Field()
+    create_user = CreateUser.Field()
+    protected_create_store = CreateStore.Field()
+    refresh = RefreshMutation.Field() ## this is added
+"""
+
 
 class User(SQLAlchemyObjectType):
     class Meta:
@@ -20,5 +30,7 @@ class Query(graphene.ObjectType):
 
 class Mutations(graphene.ObjectType):
     login = Login.Field()
+    auth = AuthMutation.Field()
+
 
 schema = graphene.Schema(query=Query, mutation=Mutations)

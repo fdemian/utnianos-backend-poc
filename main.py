@@ -3,16 +3,24 @@ from flask import Flask
 from flask_graphql import GraphQLView
 from api.models.models import db_session
 from api.models.schema import schema, User
+from flask_graphql_auth import GraphQLAuth
 
 app = Flask(__name__)
 app.debug = True
 
+# TODO: get from config file.
+app.config['SECRET_KEY'] = 'ashish'
+app.config["JWT_SECRET_KEY"] = "Ashish"
+
+
+auth = GraphQLAuth(app)
+
 app.add_url_rule(
   '/graphql',
   view_func=GraphQLView.as_view(
-    'graphql',
-    schema=schema,
-    graphiql=True
+  'graphql',
+   schema=schema,
+   graphiql=True
   )
 )
 

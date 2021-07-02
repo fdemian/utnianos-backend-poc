@@ -1,4 +1,14 @@
 import graphene
+from flask_graphql_auth import (
+    AuthInfoField,
+    GraphQLAuth,
+    get_jwt_identity,
+    create_access_token,
+    create_refresh_token,
+    query_header_jwt_required,
+    mutation_jwt_refresh_token_required,
+    mutation_jwt_required
+)
 from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
 from api.models.sessionHelper import get_session
 from api.models.models import User #, UserActivation
@@ -19,27 +29,34 @@ def get_context(config_path):
       'db_session': db_session
     }
 
-class Login(graphene.Mutation):
+class AuthMutation(graphene.Mutation):
+    access_token = graphene.String()
+    refresh_token = graphene.String()
+
     class Arguments:
-      username = graphene.String()
-      password = graphene.String()
+        username = graphene.String()
+        password = graphene.String()
 
-    id = graphene.Int()
-    token = graphene.String()
-
-    def mutate(root, info, username, password):
+    def mutate(self, info , username, password) :
         config_file = '../../config.json'
         config_file_path = path.join(path.dirname(__file__), config_file)
         context = get_context(config_file_path)
+        print(username)
+        print(password)
         user = try_login_user(username, password, context)
+        print(user)
+        if not user:
+            raise Exception('Authenication Failure : User is not registered')
+        return AuthMutation(
+            access_token = create_access_token(username),
+            refresh_token = create_refresh_token(username)
+        )
 
-        if user is None:
-           raise Exception('400', 'The user/password combination is not valid.')
 
-        str_user = int(user['user']['id'])
-        str_token = str(user['token'])
-        return Login(id=str_user, token=str_token)
 
+"""
+
+"""
 
 def try_login_user(username, password, context):
     user = authenticate_user(username, password, context)
