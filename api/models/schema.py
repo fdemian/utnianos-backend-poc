@@ -1,12 +1,7 @@
 import graphene
-from graphene import relay, List
-from graphene_sqlalchemy import SQLAlchemyObjectType, SQLAlchemyConnectionField
-from .models import (
- db_session,
- User as UserModel
-)
 from api.resolvers.Login import Login
 from api.resolvers.AuthMutation import AuthMutation
+from api.resolvers.User import UserObject, resolve_user_id
 
 """
  class Mutation(graphene.ObjectType):
@@ -16,21 +11,14 @@ from api.resolvers.AuthMutation import AuthMutation
     refresh = RefreshMutation.Field() ## this is added
 """
 
-
-class User(SQLAlchemyObjectType):
-    class Meta:
-        model = UserModel
-
 class Query(graphene.ObjectType):
-    users = List(User)
+    user = graphene.Field(UserObject, id=graphene.Int())
 
-    def resolve_users(self, info):
-        all_users = db_session().query(UserModel).all()
-        return all_users
+    def resolve_user(self, context, id):
+        return resolve_user_id(self, context, id)
 
 class Mutations(graphene.ObjectType):
     login = Login.Field()
     auth = AuthMutation.Field()
-
 
 schema = graphene.Schema(query=Query, mutation=Mutations)

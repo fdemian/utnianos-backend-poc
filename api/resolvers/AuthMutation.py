@@ -32,6 +32,7 @@ def get_context(config_path):
 class AuthMutation(graphene.Mutation):
     access_token = graphene.String()
     refresh_token = graphene.String()
+    id = graphene.Int()
 
     class Arguments:
         username = graphene.String()
@@ -41,13 +42,12 @@ class AuthMutation(graphene.Mutation):
         config_file = '../../config.json'
         config_file_path = path.join(path.dirname(__file__), config_file)
         context = get_context(config_file_path)
-        print(username)
-        print(password)
         user = try_login_user(username, password, context)
-        print(user)
+
         if not user:
             raise Exception('Authenication Failure : User is not registered')
         return AuthMutation(
+            id=user['id'],
             access_token = create_access_token(username),
             refresh_token = create_refresh_token(username)
         )
