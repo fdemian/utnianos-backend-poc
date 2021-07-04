@@ -47,16 +47,11 @@ class AuthMutation(graphene.Mutation):
         if not user:
             raise Exception('Authenication Failure : User is not registered')
         return AuthMutation(
-            id=user['id'],
+            id=user['user']['id'],
             access_token = create_access_token(username),
             refresh_token = create_refresh_token(username)
         )
 
-
-
-"""
-
-"""
 
 def try_login_user(username, password, context):
     user = authenticate_user(username, password, context)
