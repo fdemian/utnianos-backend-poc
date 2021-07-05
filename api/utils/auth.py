@@ -1,5 +1,7 @@
 import jwt
 from datetime import datetime, timedelta
+from api.utils.utils import parse_config_file
+from os import path
 
 # Helper method (move?)
 def get_user_token(user, context, expiration_time):
@@ -18,23 +20,34 @@ def get_user_token(user, context, expiration_time):
   return jwt_token
 
 
-def get_current_user(auth_headers, settings):
-    
+def check_valid_headers(auth_headers):
+    # No auth headers.
     if auth_headers is None:
-        return None
+        return False
 
-    jwt_token = auth_headers.split("=")[1]
-    jwt_secret = self.settings["jwt_secret"]
-    jwt_algorhitm = self.settings["jwt_algorithm"]
-    validated_user = validate_token(jwt_token, jwt_secret, jwt_algorhitm)
+    # Get JWT config from settings.
+    config_file = '../../config.json'
+    config_file_path = path.join(path.dirname(__file__), config_file)
+    context = parse_config_file(config_file_path)
+    jwt_settings = context['jwt']
+
+    jwt_token = auth_headers.split(' ')[1]
+    validated_user = validate_token(jwt_token, jwt_settings['secret'], jwt_settings['algorithm'])
 
     if validated_user is None:
-       return None
-
-    # Perform additional validation on JWT claims.
-    decoded_id = int(self.get_secure_cookie("user", value=validated_user["user_token"]))
-
-    if decoded_id is None:
         return None
 
-    return decoded_id
+    return validate_token
+
+
+# Decode a JWT token and return the results.
+def validate_token(jwt_token, secret, algorithm):
+    try:
+        if jwt_token is None:
+            return None
+
+        payload = jwt.decode(jwt_token, secret, algorithms=[algorithm])
+        return payload
+
+    except (jwt.DecodeError, jwt.ExpiredSignatureError):
+        return None

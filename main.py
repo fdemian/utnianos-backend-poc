@@ -4,13 +4,20 @@ from flask_graphql import GraphQLView
 from api.models.models import db_session
 from api.models.schema import schema
 from flask_graphql_auth import GraphQLAuth
+from api.utils.utils import parse_config_file
+from os import path
 
 app = Flask(__name__)
 app.debug = True
 
+
+config_file = './config.json'
+config_file_path = path.join(path.dirname(__file__), config_file)
+settings = parse_config_file(config_file_path)
+
 # TODO: get from config file.
-app.config['SECRET_KEY'] = 'fdasdffsdasadffsda'
-app.config["JWT_SECRET_KEY"] = "aafdjklklfdsaklfdsakjlfdsa"
+app.config['SECRET_KEY'] = settings['jwt']['secret']
+app.config["JWT_SECRET_KEY"] = settings['jwt']['secret']
 
 auth = GraphQLAuth(app)
 
