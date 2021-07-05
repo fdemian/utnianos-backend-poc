@@ -1,12 +1,8 @@
+import graphene
 from flask_graphql_auth import (
-    AuthInfoField,
-    GraphQLAuth,
     get_jwt_identity,
     create_access_token,
-    create_refresh_token,
-    query_header_jwt_required,
-    mutation_jwt_refresh_token_required,
-    mutation_jwt_required
+    mutation_jwt_refresh_token_required
 )
 
 class RefreshMutation(graphene.Mutation):

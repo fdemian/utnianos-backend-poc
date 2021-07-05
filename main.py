@@ -9,9 +9,8 @@ app = Flask(__name__)
 app.debug = True
 
 # TODO: get from config file.
-app.config['SECRET_KEY'] = 'ashish'
-app.config["JWT_SECRET_KEY"] = "Ashish"
-
+app.config['SECRET_KEY'] = 'fdasdffsdasadffsda'
+app.config["JWT_SECRET_KEY"] = "aafdjklklfdsaklfdsakjlfdsa"
 
 auth = GraphQLAuth(app)
 
