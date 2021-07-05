@@ -31,14 +31,18 @@ def check_valid_headers(auth_headers):
     context = parse_config_file(config_file_path)
     jwt_settings = context['jwt']
 
-    jwt_token = auth_headers.split(' ')[1]
+    split_headers = auth_headers.split(' ')
+    if len(split_headers) <= 1:
+        return False
+
+    jwt_token = split_headers[1]
+
     validated_user = validate_token(jwt_token, jwt_settings['secret'], jwt_settings['algorithm'])
 
     if validated_user is None:
         return None
 
     return validate_token
-
 
 # Decode a JWT token and return the results.
 def validate_token(jwt_token, secret, algorithm):
