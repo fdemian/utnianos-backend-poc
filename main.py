@@ -18,7 +18,7 @@ settings = parse_config_file(config_file_path)
 # TODO: get from config file.
 app.config['SECRET_KEY'] = settings['jwt']['secret']
 app.config["JWT_SECRET_KEY"] = settings['jwt']['secret']
-
+app.config["JWT_REFRESH_TOKEN_EXPIRES"] = int(settings['jwt']['expiration'])
 auth = GraphQLAuth(app)
 
 app.add_url_rule(
