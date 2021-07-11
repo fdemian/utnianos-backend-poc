@@ -13,6 +13,7 @@ alembic = "*"
 psycopg2-binary = "*"
 pyjwt = "*"
 flask-graphql-auth = "*"
+graphene-file-upload = "*"
 
 [dev-packages]
 
