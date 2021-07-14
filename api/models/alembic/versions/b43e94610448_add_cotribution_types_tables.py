@@ -17,11 +17,11 @@ depends_on = None
 
 
 def upgrade():
+    # Materias
     op.create_table(
-       'class_materials',
+       'courses',
        sa.Column('id', sa.Integer, primary_key=True, nullable=False),
-       sa.Column('name', sa.Unicode(255), nullable=False),
-       sa.Column('file_path', sa.Text, nullable=True)
+       sa.Column('name', sa.Unicode(255), nullable=False)
     )
 
     op.create_table(
@@ -31,10 +31,12 @@ def upgrade():
     )
 
     op.create_table(
-       'subjects_contrib',
+       'class_materials',
        sa.Column('id', sa.Integer, primary_key=True, nullable=False),
        sa.Column('name', sa.Unicode(255), nullable=False),
-       sa.Column('class_material_id', sa.Integer, sa.ForeignKey('class_materials.id'))
+       sa.Column('file_path', sa.Text, nullable=True),
+       sa.Column('course_id', sa.Integer, sa.ForeignKey('courses.id')),
+       sa.Column('contrib_types', sa.Text, nullable=False)
     )
 
     # Association table (class materials / Contrib types)
@@ -47,7 +49,7 @@ def upgrade():
 
 
 def downgrade():
-    op.drop_table('class_materials')
-    op.drop_table('subjects_contrib')
-    op.drop_table('contrib_types')
     op.drop_table('materials_types')
+    op.drop_table('class_materials')
+    op.drop_table('courses')
+    op.drop_table('contrib_types')

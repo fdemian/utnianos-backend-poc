@@ -39,29 +39,15 @@ class User(Base):
     failed_attempts = Column(Integer, nullable=False)
     lockout_time = Column(DateTime, nullable=True)
 
-
-class Subject(Base):
-    __tablename__ = 'subjects_contrib'
-
+class Course(Base):
+    __tablename__ = 'courses'
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(Unicode(255), nullable=False)
-    class_material_id = Column(Integer, ForeignKey('class_materials.id'))
-
-    #
-    class_materials = relationship("ClassMaterial", back_populates="subject")
-
 
 class ContribType(Base):
     __tablename__ = 'contrib_types'
-
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(Unicode(255), nullable=False)
-
-    class_materials = relationship(
-      "ClassMaterial",
-      secondary=material_type_association,
-      back_populates="contrib_types"
-    )
 
 # Temporary name (until someone comes up with something better).
 class ClassMaterial(Base):
@@ -70,11 +56,7 @@ class ClassMaterial(Base):
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(Text, nullable=False)
     file_path = Column(Text, nullable=True)
+    course_id = Column(Integer, ForeignKey('courses.id'))
+    contrib_types = Column(Text, nullable=False)
 
-    # Collections
-    contrib_types = relationship(
-       "ContribType",
-       secondary=material_type_association,
-       back_populates="class_materials"
-    )
-    subject = relationship("Subject", back_populates="class_materials", uselist=False)
+    course = relationship("Course", uselist=False)

@@ -17,8 +17,6 @@ branch_labels = None
 depends_on = None
 
 def upgrade():
-
-
    contrib_table = table('contrib_types',column('name', sa.String))
    op.bulk_insert(contrib_table,
      [
@@ -36,6 +34,6 @@ def upgrade():
      ]
     )
 
-
 def downgrade():
-    op.execute("TRUNCATE TABLE contrib_types;")
+    op.execute("DELETE FROM materials_types;")
+    op.execute("DELETE FROM contrib_types;")
