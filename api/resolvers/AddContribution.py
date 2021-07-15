@@ -30,8 +30,7 @@ class AddContribution(graphene.Mutation):
           course_material.name = title
           course_material.course = course_obj
           course_material.file_path = file_path
-          course_material.contrib_types = ','.join(types)
-
+          course_material.contrib_types = types
           db_session.add(course_material)
           db_session.commit()
 
