@@ -12,7 +12,7 @@ class ClassMaterialObj(graphene.ObjectType):
     file_path = graphene.String()
     name = graphene.String()
     contrib_types = graphene.String()
-    #course = graphene.ObjectType(CourseObj)
+    course = graphene.Field(CourseObj)
 
 def resolve_class_materials(self, info):
     config_file = '../../config.json'
