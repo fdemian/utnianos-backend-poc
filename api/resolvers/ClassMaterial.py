@@ -10,6 +10,7 @@ class ClassMaterialObj(graphene.ObjectType):
     id = graphene.Int()
     name = graphene.String()
     file_path = graphene.String()
+    description = graphene.String()
     name = graphene.String()
     contrib_types = graphene.String()
     course = graphene.Field(CourseObj)
