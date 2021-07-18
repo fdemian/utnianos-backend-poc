@@ -28,6 +28,7 @@ class AddContribution(graphene.Mutation):
           course_obj = db_session.query(Course).filter(Course.name == course).one()
           course_material = ClassMaterial();
           course_material.name = title
+          course_material.description = description
           course_material.course = course_obj
           course_material.file_path = file_path
           course_material.contrib_types = types

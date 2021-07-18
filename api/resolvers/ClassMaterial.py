@@ -20,3 +20,17 @@ def resolve_class_materials(self, info):
     db_session = get_session(config_file_path)
     all_class_materials = db_session.query(ClassMaterial).all()
     return all_class_materials
+
+def resolve_class_materials_id(self, info, id):
+    config_file = '../../config.json'
+    config_file_path = path.join(path.dirname(__file__), config_file)
+    db_session = get_session(config_file_path)
+    try:
+       class_material = db_session.query(ClassMaterial).filter(ClassMaterial.id == id).one()
+       return class_material
+
+    except MultipleResultsFound:
+       return None
+
+    except NoResultFound:
+       return None

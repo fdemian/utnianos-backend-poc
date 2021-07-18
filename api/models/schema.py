@@ -5,7 +5,11 @@ from api.resolvers.User import UserObject, resolve_user_id
 from api.resolvers.ContribTypes import ContribTypeObj, resolve_contrib_objects
 from api.resolvers.AddContribution import AddContribution
 from api.resolvers.Courses import CourseObj, resolve_course_objects
-from api.resolvers.ClassMaterial import ClassMaterialObj, resolve_class_materials
+from api.resolvers.ClassMaterial import (
+ClassMaterialObj,
+resolve_class_materials,
+resolve_class_materials_id
+)
 from api.resolvers.CreateUser import CreateUser
 from flask_graphql_auth import query_header_jwt_required
 from api.utils.auth import check_valid_headers
@@ -17,6 +21,7 @@ class Query(graphene.ObjectType):
     contrib_types = graphene.List(graphene.NonNull(ContribTypeObj))
     courses = graphene.List(graphene.NonNull(CourseObj))
     class_materials = graphene.List(graphene.NonNull(ClassMaterialObj))
+    class_material = graphene.Field(ClassMaterialObj, id=graphene.Int())
 
     def resolve_user(self, context, id):
         auth_headers = request.headers.get('authorization')
@@ -34,6 +39,9 @@ class Query(graphene.ObjectType):
 
     def resolve_class_materials(self,context):
         return resolve_class_materials(self, context)
+
+    def resolve_class_material(self, info, id):
+        return resolve_class_materials_id(self, info, id)
 
 class Mutations(graphene.ObjectType):
     auth = AuthMutation.Field()

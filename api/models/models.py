@@ -55,6 +55,7 @@ class ClassMaterial(Base):
 
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(Text, nullable=False)
+    description = Column(Text, nullable=False)
     file_path = Column(Text, nullable=True)
     course_id = Column(Integer, ForeignKey('courses.id'))
     contrib_types = Column(Text, nullable=False)
