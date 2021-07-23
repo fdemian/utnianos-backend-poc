@@ -38,9 +38,58 @@ class User(Base):
     valid = Column(Boolean, nullable=False)
     failed_attempts = Column(Integer, nullable=False)
     lockout_time = Column(DateTime, nullable=True)
+    career_plan_id = Column(Integer, ForeignKey('career_plan.id'), nullable=True)
 
+    career_plan = relationship("CareerPlan", uselist=False)
+
+# Course (e.j) mathematical analysis.
 class Course(Base):
     __tablename__ = 'courses'
+    id = Column(Integer, primary_key=True, nullable=False)
+    name = Column(Unicode(255), nullable=False)
+
+    orientation = Column(Unicode(255), nullable=False)
+    code = Column(Unicode(255), nullable=False)
+    lecture_time = Column(Unicode(255), nullable=False)
+    link_to_doc = Column(Unicode(255), nullable=False)
+    area_id = Column(Integer, ForeignKey('areas.id'))
+    department_id = Column(Integer, ForeignKey('deparments.id'))
+
+    # Composiste attributes (w/rel to other tables).
+    #prerrequisites # self relationship.
+    area = relationship("Area", uselist=False)
+    department = relationship("Department", uselist=False)
+
+    """
+     # Composiste attributes (w/rel to other tables).
+     prerrequisites # self relationship.
+    """
+
+class CareerPlan(Base):
+  __tablename__ = 'career_plan'
+  id = Column(Integer, primary_key=True, nullable=False)
+  name = Column(Unicode(255), nullable=False)
+
+class Department(Base):
+    __tablename__ = 'deparments'
+    id = Column(Integer, primary_key=True, nullable=False)
+    name = Column(Unicode(255), nullable=False)
+
+class Area(Base):
+    __tablename__ = 'areas'
+    id = Column(Integer, primary_key=True, nullable=False)
+    name = Column(Unicode(255), nullable=False)
+
+class CourseStatus(Base):
+    __tablename__ = 'courses_status'
+    course_id = Column(Integer, ForeignKey('courses.id'))
+    status_id = Column(Integer, ForeignKey('completion_status.id'))
+
+    status = relationship("CompletionStatus", uselist=False)
+    course = relationship("Course", uselist=False)
+
+class CompletionStatus(Base):
+    __tablename__ = 'completion_status'
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(Unicode(255), nullable=False)
 
@@ -48,6 +97,7 @@ class ContribType(Base):
     __tablename__ = 'contrib_types'
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(Unicode(255), nullable=False)
+
 
 # Temporary name (until someone comes up with something better).
 class ClassMaterial(Base):
