@@ -6,7 +6,7 @@ from api.utils.utils import (delay_time, parse_config_file)
 from api.utils.crypto import check_password, hash_password
 from api.utils.auth import get_user_token
 from datetime import datetime
-from CareerPlan import CareerPlanObj
+from .CareerPlan import CareerPlanObj
 from os import path
 
 

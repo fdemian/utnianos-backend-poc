@@ -17,11 +17,10 @@ db_session = get_session(config_file_path)
 Base = declarative_base()
 Base.query = db_session.query_property() # We will need this for querying
 
-material_type_association = Table(
-  'materials_types',
-  Base.metadata,
-  Column('class_materials_id', Integer, ForeignKey('class_materials.id')),
-  Column('contrib_types_id', Integer, ForeignKey('contrib_types.id'))
+course_association = Table('courses_status',
+    Base.metadata,
+    Column('course_id', ForeignKey('courses.id')),
+    Column('completion_id', ForeignKey('completion_status.id'))
 )
 
 # If the user uses oauth salt and password are null.
@@ -38,9 +37,10 @@ class User(Base):
     valid = Column(Boolean, nullable=False)
     failed_attempts = Column(Integer, nullable=False)
     lockout_time = Column(DateTime, nullable=True)
-    career_plan_id = Column(Integer, ForeignKey('career_plan.id'), nullable=True)
+    career_plan_id = Column(Integer, ForeignKey('career_plans.id'), nullable=True)
 
     career_plan = relationship("CareerPlan", uselist=False)
+
 
 # Course (e.j) mathematical analysis.
 class Course(Base):
@@ -59,6 +59,8 @@ class Course(Base):
     #prerrequisites # self relationship.
     area = relationship("Area", uselist=False)
     department = relationship("Department", uselist=False)
+    statuses = relationship("CompletionStatus", secondary=course_association)
+
 
     """
      # Composiste attributes (w/rel to other tables).
@@ -66,7 +68,7 @@ class Course(Base):
     """
 
 class CareerPlan(Base):
-  __tablename__ = 'career_plan'
+  __tablename__ = 'career_plans'
   id = Column(Integer, primary_key=True, nullable=False)
   name = Column(Unicode(255), nullable=False)
 
@@ -80,14 +82,6 @@ class Area(Base):
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(Unicode(255), nullable=False)
 
-class CourseStatus(Base):
-    __tablename__ = 'courses_status'
-    course_id = Column(Integer, ForeignKey('courses.id'))
-    status_id = Column(Integer, ForeignKey('completion_status.id'))
-
-    status = relationship("CompletionStatus", uselist=False)
-    course = relationship("Course", uselist=False)
-
 class CompletionStatus(Base):
     __tablename__ = 'completion_status'
     id = Column(Integer, primary_key=True, nullable=False)
@@ -97,6 +91,7 @@ class ContribType(Base):
     __tablename__ = 'contrib_types'
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(Unicode(255), nullable=False)
+
 
 
 # Temporary name (until someone comes up with something better).

@@ -36,7 +36,7 @@ def upgrade():
     )
 
     op.create_table(
-      'career_plan',
+      'career_plans',
       sa.Column('id', sa.Integer, primary_key=True, nullable=False),
       sa.Column('name', sa.Unicode(255), nullable=False)
     )
@@ -48,7 +48,7 @@ def upgrade():
     )
 
     # Career plan column on user.
-    op.add_column('users', sa.Column('career_plan_id', sa.Integer, sa.ForeignKey('career_plan.id'), nullable=True))
+    op.add_column('users', sa.Column('career_plan_id', sa.Integer, sa.ForeignKey('career_plans.id'), nullable=True))
 
     # Courses columns.
     op.add_column('courses', sa.Column('code', sa.Unicode(255), nullable=False, server_default=""))
@@ -75,4 +75,4 @@ def downgrade():
     op.drop_table('completion_status')
     op.drop_table('areas')
     op.drop_table('deparments')
-    op.drop_table('career_plan')
+    op.drop_table('career_plans')
