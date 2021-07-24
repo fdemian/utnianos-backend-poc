@@ -6,7 +6,9 @@ from api.utils.utils import (delay_time, parse_config_file)
 from api.utils.crypto import check_password, hash_password
 from api.utils.auth import get_user_token
 from datetime import datetime
+from CareerPlan import CareerPlanObj
 from os import path
+
 
 class UserObject(graphene.ObjectType):
 
@@ -16,6 +18,7 @@ class UserObject(graphene.ObjectType):
       fullname = graphene.String()
       email = graphene.String()
       link = graphene.String()
+      careerPlan = graphene.Field(CareerPlanObj)
 
 def resolve_user_id(self, info, id):
         config_file = '../../config.json'
@@ -50,7 +53,8 @@ def user_to_dict(user):
       'username': user.username,
       'fullname': user.fullname,
       'email': user.email,
-      'link': user_link
+      'link': user_link,
+      'careerPlan': user.career_plan
     }
 
     return payload
