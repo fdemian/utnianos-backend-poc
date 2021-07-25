@@ -19,7 +19,7 @@ from datetime import datetime
 from os import path
 
 def get_context(config_path):
-    config_file = '../../config.json'
+    config_file = '../../../config.json'
     config_file_path = path.join(path.dirname(__file__), config_file)
     settings = parse_config_file(config_file_path)
     db_session = get_session(config_file_path)
@@ -39,7 +39,7 @@ class AuthMutation(graphene.Mutation):
         password = graphene.String()
 
     def mutate(self, info , username, password) :
-        config_file = '../../config.json'
+        config_file = '../../../config.json'
         config_file_path = path.join(path.dirname(__file__), config_file)
         context = get_context(config_file_path)
         user = try_login_user(username, password, context)

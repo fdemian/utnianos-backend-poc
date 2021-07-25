@@ -8,7 +8,7 @@ class CourseObj(graphene.ObjectType):
       name = graphene.String()
 
 def resolve_course_objects(self, context):
-    config_file = '../../config.json'
+    config_file = '../../../config.json'
     config_file_path = path.join(path.dirname(__file__), config_file)
     db_session = get_session(config_file_path)
     all_types = db_session.query(Course).all()

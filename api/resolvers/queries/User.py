@@ -8,7 +8,7 @@ from api.utils.auth import get_user_token
 from datetime import datetime
 from .CareerPlan import CareerPlanObj
 from os import path
-
+from flask_graphql_auth import query_header_jwt_required
 
 class UserObject(graphene.ObjectType):
 
@@ -21,7 +21,7 @@ class UserObject(graphene.ObjectType):
       careerPlan = graphene.Field(CareerPlanObj)
 
 def resolve_user_id(self, info, id):
-        config_file = '../../config.json'
+        config_file = '../../../config.json'
         config_file_path = path.join(path.dirname(__file__), config_file)
         db_session = get_session(config_file_path)
         user = get_user_if_exists(db_session, id)

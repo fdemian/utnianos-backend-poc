@@ -14,7 +14,7 @@ class AddCareerPlan(graphene.Mutation):
         userId = graphene.Int()
 
     def mutate(self, info, planId, userId):
-        config_file = '../../config.json'
+        config_file = '../../../config.json'
         config_file_path = path.join(path.dirname(__file__), config_file)
         db_session = get_session(config_file_path)
 
