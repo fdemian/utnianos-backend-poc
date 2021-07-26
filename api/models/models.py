@@ -17,11 +17,20 @@ db_session = get_session(config_file_path)
 Base = declarative_base()
 Base.query = db_session.query_property() # We will need this for querying
 
+#
 course_association = Table('courses_status',
-    Base.metadata,
-    Column('course_id', ForeignKey('courses.id')),
-    Column('completion_id', ForeignKey('completion_status.id'))
+ Base.metadata,
+ Column('course_id', ForeignKey('courses.id')),
+ Column('completion_id', ForeignKey('completion_status.id'))
 )
+
+
+courses_plans = Table('career_plan_courses',
+ Base.metadata,
+ Column('career_plan_id', ForeignKey('career_plans.id')),
+ Column('course_id', ForeignKey('courses.id'))
+)
+
 
 # If the user uses oauth salt and password are null.
 class User(Base):
@@ -54,6 +63,7 @@ class Course(Base):
     link_to_doc = Column(Unicode(255), nullable=False)
     area_id = Column(Integer, ForeignKey('areas.id'))
     department_id = Column(Integer, ForeignKey('deparments.id'))
+    year = Column(Integer, nullable=False)
 
     # Composiste attributes (w/rel to other tables).
     #prerrequisites # self relationship.
@@ -71,6 +81,8 @@ class CareerPlan(Base):
   __tablename__ = 'career_plans'
   id = Column(Integer, primary_key=True, nullable=False)
   name = Column(Unicode(255), nullable=False)
+
+  courses = relationship("Course", secondary=courses_plans)
 
 class Department(Base):
     __tablename__ = 'deparments'
@@ -91,8 +103,6 @@ class ContribType(Base):
     __tablename__ = 'contrib_types'
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(Unicode(255), nullable=False)
-
-
 
 # Temporary name (until someone comes up with something better).
 class ClassMaterial(Base):

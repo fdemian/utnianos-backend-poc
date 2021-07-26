@@ -6,6 +6,7 @@ from os import path
 class CourseObj(graphene.ObjectType):
       id = graphene.Int()
       name = graphene.String()
+      year = graphene.Int()
 
 def resolve_course_objects(self, context):
     config_file = '../../../config.json'
