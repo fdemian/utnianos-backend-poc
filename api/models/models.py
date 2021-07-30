@@ -17,20 +17,11 @@ db_session = get_session(config_file_path)
 Base = declarative_base()
 Base.query = db_session.query_property() # We will need this for querying
 
-#
-course_association = Table('courses_status',
- Base.metadata,
- Column('course_id', ForeignKey('courses.id')),
- Column('completion_id', ForeignKey('completion_status.id'))
-)
-
-
 courses_plans = Table('career_plan_courses',
  Base.metadata,
  Column('career_plan_id', ForeignKey('career_plans.id')),
  Column('course_id', ForeignKey('courses.id'))
 )
-
 
 # If the user uses oauth salt and password are null.
 class User(Base):
@@ -69,8 +60,6 @@ class Course(Base):
     #prerrequisites # self relationship.
     area = relationship("Area", uselist=False)
     department = relationship("Department", uselist=False)
-    statuses = relationship("CompletionStatus", secondary=course_association)
-
 
     """
      # Composiste attributes (w/rel to other tables).
@@ -116,3 +105,11 @@ class ClassMaterial(Base):
     contrib_types = Column(Text, nullable=False)
 
     course = relationship("Course", uselist=False)
+
+class CoursesStatus(Base):
+    __tablename__ = 'courses_status'
+
+    id = Column(Integer, primary_key=True, nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    course_id = Column(Integer, ForeignKey('courses.id'))
+    completion_id = Column(Integer, ForeignKey('completion_status.id'))

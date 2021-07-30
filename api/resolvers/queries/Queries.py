@@ -5,15 +5,27 @@ from api.utils.auth import check_valid_headers
 from api.resolvers.queries.User import UserObject, resolve_user_id
 from api.resolvers.queries.ContribTypes import ContribTypeObj, resolve_contrib_objects
 from api.resolvers.queries.Courses import CourseObj, resolve_course_objects
+
+from api.resolvers.queries.CoursesStatus import (
+  CoursesStatusObj,
+ _resolve_courses_status_id
+)
+
 from api.resolvers.queries.CareerPlan import (
     CareerPlanObj,
     resolve_career_plan_objects,
     _resolve_career_plan
 )
+
 from api.resolvers.queries.ClassMaterial import (
 ClassMaterialObj,
 resolve_class_materials,
 resolve_class_materials_id
+)
+
+from api.resolvers.queries.CompletionStatuses import (
+ CompletionStatusObj,
+ _resolve_completion_statuses
 )
 
 class Query(graphene.ObjectType):
@@ -26,6 +38,8 @@ class Query(graphene.ObjectType):
     class_material = graphene.Field(ClassMaterialObj, id=graphene.Int())
     career_plans = graphene.List(graphene.NonNull(CareerPlanObj))
     career_plan = graphene.Field(CareerPlanObj, id=graphene.Int())
+    courses_status = graphene.List(CoursesStatusObj, id=graphene.Int())
+    completion_statuses = graphene.List(graphene.NonNull(CompletionStatusObj))
 
     def resolve_user(self, context, id):
         auth_headers = request.headers.get('authorization')
@@ -52,3 +66,9 @@ class Query(graphene.ObjectType):
 
     def resolve_class_material(self, info, id):
         return resolve_class_materials_id(self, info, id)
+
+    def resolve_courses_status(self, info, id):
+        return _resolve_courses_status_id(self, info, id)
+
+    def resolve_completion_statuses(self, context):
+        return _resolve_completion_statuses(self, context)
