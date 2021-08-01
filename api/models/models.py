@@ -57,14 +57,17 @@ class Course(Base):
     year = Column(Integer, nullable=False)
 
     # Composiste attributes (w/rel to other tables).
-    #prerrequisites # self relationship.
     area = relationship("Area", uselist=False)
     department = relationship("Department", uselist=False)
 
-    """
-     # Composiste attributes (w/rel to other tables).
-     prerrequisites # self relationship.
-    """
+
+class CoursePrerrequisites(Base):
+  __tablename__ = 'course_prerrequisites'
+  id = Column(Integer, primary_key=True, nullable=False)
+  course_id = Column(Integer, ForeignKey('courses.id'))
+  prerrequisite_id = Column(Integer, ForeignKey('courses.id'))
+  type = Column(String(1), nullable=False)
+  completion_id = Column(Integer, ForeignKey('completion_status.id'))
 
 class CareerPlan(Base):
   __tablename__ = 'career_plans'

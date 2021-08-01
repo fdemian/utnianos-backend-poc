@@ -28,6 +28,11 @@ from api.resolvers.queries.CompletionStatuses import (
  _resolve_completion_statuses
 )
 
+from api.resolvers.queries.CoursePrerrequisites import (
+ CoursePrerrequisitesObj,
+ resolve_prerreq_objects
+)
+
 class Query(graphene.ObjectType):
 
     # Query fields.
@@ -40,6 +45,7 @@ class Query(graphene.ObjectType):
     career_plan = graphene.Field(CareerPlanObj, id=graphene.Int())
     courses_status = graphene.List(CoursesStatusObj, id=graphene.Int())
     completion_statuses = graphene.List(graphene.NonNull(CompletionStatusObj))
+    course_prerrequisites = graphene.List(graphene.NonNull(CoursePrerrequisitesObj))
 
     def resolve_user(self, context, id):
         auth_headers = request.headers.get('authorization')
@@ -72,3 +78,6 @@ class Query(graphene.ObjectType):
 
     def resolve_completion_statuses(self, context):
         return _resolve_completion_statuses(self, context)
+
+    def resolve_course_prerrequisites(self, context):
+        return resolve_prerreq_objects(self, context)
