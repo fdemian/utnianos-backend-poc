@@ -7,6 +7,8 @@ from os import path
 class ChangeCourseStatus(graphene.Mutation):
 
     ok = graphene.Boolean()
+    course_id = graphene.Int()
+    status_id = graphene.Int()
 
     class Arguments:
         course_id = graphene.Int()
@@ -35,4 +37,8 @@ class ChangeCourseStatus(graphene.Mutation):
         except NoResultFound:
            return ChangeCourseStatus(ok=False)
 
-        return ChangeCourseStatus(ok=True)
+        return ChangeCourseStatus(
+           ok=True,
+           course_id=course_id,
+           status_id=status_id
+        )
