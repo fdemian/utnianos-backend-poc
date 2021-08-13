@@ -5,37 +5,35 @@ from api.models.schema import schema
 from flask_graphql_auth import GraphQLAuth
 from flask_graphql import GraphQLView
 from api.utils.utils import parse_config_file
+from uploads import upload_file
 from os import path
-
-app = Flask(__name__)
-app.debug = True
-
 
 config_file = './config.json'
 config_file_path = path.join(path.dirname(__file__), config_file)
 settings = parse_config_file(config_file_path)
 
-# TODO: get from config file.
+# App configuration.
+app = Flask(__name__)
+app.debug = True
+app.config['UPLOAD_FOLDER'] = "/"
 app.config['SECRET_KEY'] = settings['jwt']['secret']
 app.config["JWT_SECRET_KEY"] = settings['jwt']['secret']
 app.config["JWT_REFRESH_TOKEN_EXPIRES"] = int(settings['jwt']['expiration'])
 auth = GraphQLAuth(app)
 
-def upload_files():
-    if request.method != 'POST':
-        print("NOT POST METHOD. FAIL")
-        return
+@app.route('/api/uploads', methods=['POST'])
+def uploadFile():
+	return upload_file()
 
 app.add_url_rule(
   '/graphql',
   view_func=GraphQLView.as_view(
   'graphql',
    schema=schema,
-   graphiql=True
+   graphiql=False,
+   batch=True
   )
 )
-app.add_url_rule("/uploads", view_func=upload_files)
-
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
