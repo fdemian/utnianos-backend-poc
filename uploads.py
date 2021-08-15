@@ -1,8 +1,10 @@
 import os
 from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
+from api.models.sessionHelper import get_session
 
-UPLOAD_FOLDER = '/path/to/the/uploads'
+# upload_folder = app.config['UPLOAD_FOLDER']
+UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 def allowed_file(filename):
@@ -21,12 +23,15 @@ def upload_file():
         if file.filename == '':
             flash('No selected file')
             return { 'ok': False, 'error': 'No file selected.'}
+        
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            #upload_folder = app.config['UPLOAD_FOLDER']
-            save_path = os.path.join(os.getcwd(), filename)
+            upload_path = os.path.join(UPLOAD_FOLDER, filename)
+            save_path = os.path.join(os.getcwd(), upload_path)
             file.save(save_path)
+
             return {
               'Ok' : True,
-              'url': filename
+              'url': upload_path,
+              'type': file.content_type
             }

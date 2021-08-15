@@ -96,6 +96,13 @@ class ContribType(Base):
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(Unicode(255), nullable=False)
 
+class File(Base):
+    __tablename__ = 'files'
+    id = Column(Integer, primary_key=True, nullable=False)
+    path = Column(Unicode(255), nullable=False)
+    type = Column(Unicode(255), nullable=False)
+    class_material_id = Column(Integer, ForeignKey('class_materials.id'))
+
 # Temporary name (until someone comes up with something better).
 class ClassMaterial(Base):
     __tablename__ = 'class_materials'
@@ -103,10 +110,10 @@ class ClassMaterial(Base):
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(Text, nullable=False)
     description = Column(Text, nullable=False)
-    file_path = Column(Text, nullable=True)
     course_id = Column(Integer, ForeignKey('courses.id'))
     contrib_types = Column(Text, nullable=False)
 
+    files = relationship("File")
     course = relationship("Course", uselist=False)
 
 class CoursesStatus(Base):
