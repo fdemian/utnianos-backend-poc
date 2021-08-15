@@ -23,7 +23,7 @@ def upload_file():
         if file.filename == '':
             flash('No selected file')
             return { 'ok': False, 'error': 'No file selected.'}
-        
+
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             upload_path = os.path.join(UPLOAD_FOLDER, filename)
@@ -31,7 +31,6 @@ def upload_file():
             file.save(save_path)
 
             return {
-              'Ok' : True,
               'url': upload_path,
               'type': file.content_type
             }

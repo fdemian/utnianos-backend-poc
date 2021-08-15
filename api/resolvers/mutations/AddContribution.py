@@ -1,9 +1,13 @@
 import graphene
 from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
 from api.models.sessionHelper import get_session
-from api.models.models import ClassMaterial, Course
+from api.models.models import ClassMaterial, Course, File
 from api.scripts.add_user import do_save_user
 from os import path
+
+class FileParam(graphene.InputObjectType):
+   url = graphene.String()
+   type = graphene.String()
 
 class AddContribution(graphene.Mutation):
 
@@ -15,14 +19,13 @@ class AddContribution(graphene.Mutation):
         description = graphene.String()
         types = graphene.String()
         course = graphene.String()
-        path = graphene.String(required=False)
+        files_list = graphene.List(FileParam)
 
-    def mutate(self, info, title, description, types, course, **kwargs):
+    def mutate(self, info, title, description, types, course, files_list):
         config_file = '../../../config.json'
         config_file_path = path.join(path.dirname(__file__), config_file)
 
         db_session = get_session(config_file_path)
-        file_path = kwargs.get('path', None)
 
         try:
           course_obj = db_session.query(Course).filter(Course.name == course).one()
@@ -30,9 +33,20 @@ class AddContribution(graphene.Mutation):
           course_material.name = title
           course_material.description = description
           course_material.course = course_obj
-          course_material.file_path = file_path
           course_material.contrib_types = types
           db_session.add(course_material)
+          db_session.commit()
+          cm_id = course_material.id
+
+          for file in files_list:
+              print(file.url)
+              print(file.type)
+              file_to_save = File()
+              file_to_save.path = file.url
+              file_to_save.type = file.type
+              file_to_save.class_material_id = cm_id
+              db_session.add(file_to_save)
+
           db_session.commit()
 
         except MultipleResultsFound:
