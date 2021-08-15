@@ -1,11 +1,21 @@
 import os
-from flask import Flask, flash, request, redirect, url_for
+from flask import (
+    Flask,
+    flash,
+    request,
+    redirect,
+    url_for,
+    send_from_directory
+)
 from werkzeug.utils import secure_filename
 from api.models.sessionHelper import get_session
 
 # upload_folder = app.config['UPLOAD_FOLDER']
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = 'fileuploads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+
+def serve_file(name):
+    return send_from_directory(UPLOAD_FOLDER, name)
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -29,8 +39,9 @@ def upload_file():
             upload_path = os.path.join(UPLOAD_FOLDER, filename)
             save_path = os.path.join(os.getcwd(), upload_path)
             file.save(save_path)
+            file_url = url_for("downloadFile", name=filename)
 
             return {
-              'url': upload_path,
+              'url': file_url,
               'type': file.content_type
             }

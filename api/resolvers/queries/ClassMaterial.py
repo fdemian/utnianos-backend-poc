@@ -5,15 +5,16 @@ from api.models.models import ClassMaterial, Course
 from api.resolvers.queries.Courses import CourseObj
 from api.scripts.add_user import do_save_user
 from os import path
+from .Files import FileObj
 
 class ClassMaterialObj(graphene.ObjectType):
     id = graphene.Int()
     name = graphene.String()
-    file_path = graphene.String()
     description = graphene.String()
     name = graphene.String()
     contrib_types = graphene.String()
     course = graphene.Field(CourseObj)
+    files = graphene.List(graphene.NonNull(FileObj))
 
 def resolve_class_materials(self, info):
     config_file = '../../../config.json'
