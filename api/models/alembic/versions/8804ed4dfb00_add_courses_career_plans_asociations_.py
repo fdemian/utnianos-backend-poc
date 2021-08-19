@@ -29,4 +29,4 @@ def upgrade():
 
 def downgrade():
     op.drop_table('career_plan_courses')
-    op.create_table('courses_status')
+    op.drop_table('courses_status')

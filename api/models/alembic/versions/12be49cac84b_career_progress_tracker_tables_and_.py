@@ -74,5 +74,5 @@ def downgrade():
     op.drop_table('course_status')
     op.drop_table('completion_status')
     op.drop_table('areas')
-    op.drop_table('deparments')
+    op.drop_table('departments')
     op.drop_table('career_plans')
