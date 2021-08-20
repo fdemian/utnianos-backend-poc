@@ -19,7 +19,7 @@ Base.query = db_session.query_property() # We will need this for querying
 
 courses_plans = Table('career_plan_courses',
  Base.metadata,
- Column('career_plan_id', ForeignKey('career_plans.id')),
+ Column('career_plan_code', ForeignKey('career_plans.code')),
  Column('course_id', ForeignKey('courses.id'))
 )
 
@@ -37,7 +37,7 @@ class User(Base):
     valid = Column(Boolean, nullable=False)
     failed_attempts = Column(Integer, nullable=False)
     lockout_time = Column(DateTime, nullable=True)
-    career_plan_id = Column(Integer, ForeignKey('career_plans.id'), nullable=True)
+    career_plan_id = Column(Unicode(255), ForeignKey('career_plans.code'), nullable=True)
 
     career_plan = relationship("CareerPlan", uselist=False)
 
@@ -48,10 +48,10 @@ class Course(Base):
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(Unicode(255), nullable=False)
 
-    orientation = Column(Unicode(255), nullable=False)
+    orientation = Column(Unicode(255), nullable=True)
     code = Column(Unicode(255), nullable=False)
-    lecture_time = Column(Unicode(255), nullable=False)
-    link_to_doc = Column(Unicode(255), nullable=False)
+    lecture_time = Column(Unicode(255), nullable=True)
+    link_to_doc = Column(Unicode(255), nullable=True)
     area_id = Column(Integer, ForeignKey('areas.id'))
     department_id = Column(Integer, ForeignKey('deparments.id'))
     year = Column(Integer, nullable=False)
@@ -71,7 +71,7 @@ class CoursePrerrequisites(Base):
 
 class CareerPlan(Base):
   __tablename__ = 'career_plans'
-  id = Column(Integer, primary_key=True, nullable=False)
+  code = Column(Unicode(255), nullable=False, primary_key=True)
   name = Column(Unicode(255), nullable=False)
 
   courses = relationship("Course", secondary=courses_plans)

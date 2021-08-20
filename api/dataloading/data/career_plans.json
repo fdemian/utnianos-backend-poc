@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Ingeniería en sistemas de Información [K08] (UTN - FRBA)",
+    "code": "K08"
+  },
+  {
+    "name": "Analista Universitario en Sistemas (UTN - FRBA)",
+    "code": "K08-INT"
+  },
+  {
+    "name": "Ingeniería Electrónica [RN95] (UTN - FRBA)",
+    "code": "R95"
+  },
+  {
+    "name": "Técnico Universitario en Electrónica [RN95] (UTN - FRBA)",
+    "code": "R95-INT"
+  }
+]
