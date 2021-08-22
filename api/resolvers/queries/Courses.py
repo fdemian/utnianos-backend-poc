@@ -4,7 +4,7 @@ from api.models.models import Course #, UserActivation
 from os import path
 
 class CourseObj(graphene.ObjectType):
-      id = graphene.Int()
+      code = graphene.String()
       name = graphene.String()
       year = graphene.Int()
 

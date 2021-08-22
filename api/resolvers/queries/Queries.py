@@ -42,7 +42,7 @@ class Query(graphene.ObjectType):
     class_materials = graphene.List(graphene.NonNull(ClassMaterialObj))
     class_material = graphene.Field(ClassMaterialObj, id=graphene.Int())
     career_plans = graphene.List(graphene.NonNull(CareerPlanObj))
-    career_plan = graphene.Field(CareerPlanObj, id=graphene.Int())
+    career_plan = graphene.Field(CareerPlanObj, id=graphene.String())
     courses_status = graphene.List(CoursesStatusObj, id=graphene.Int())
     completion_statuses = graphene.List(graphene.NonNull(CompletionStatusObj))
     course_prerrequisites = graphene.List(graphene.NonNull(CoursePrerrequisitesObj))

@@ -20,8 +20,25 @@ Base.query = db_session.query_property() # We will need this for querying
 courses_plans = Table('career_plan_courses',
  Base.metadata,
  Column('career_plan_code', ForeignKey('career_plans.code')),
- Column('course_id', ForeignKey('courses.id'))
+ Column('course_code', ForeignKey('courses.code'))
 )
+
+class CoursesPlans(Base):
+    __tablename__ = 'career_plan_courses'
+    __table_args__ = {'extend_existing': True}
+    
+    career_plan_code = Column(
+      Unicode(255),
+      ForeignKey('career_plans.code'),
+      nullable=False,
+      primary_key=True
+    )
+    course_code = Column(
+      Unicode(255),
+      ForeignKey('courses.code'),
+      nullable=False,
+      primary_key=True
+    )
 
 # If the user uses oauth salt and password are null.
 class User(Base):
@@ -37,7 +54,7 @@ class User(Base):
     valid = Column(Boolean, nullable=False)
     failed_attempts = Column(Integer, nullable=False)
     lockout_time = Column(DateTime, nullable=True)
-    career_plan_id = Column(Unicode(255), ForeignKey('career_plans.code'), nullable=True)
+    career_plan_code = Column(Unicode(255), ForeignKey('career_plans.code'), nullable=True)
 
     career_plan = relationship("CareerPlan", uselist=False)
 
@@ -45,16 +62,15 @@ class User(Base):
 # Course (e.j) mathematical analysis.
 class Course(Base):
     __tablename__ = 'courses'
-    id = Column(Integer, primary_key=True, nullable=False)
-    name = Column(Unicode(255), nullable=False)
 
+    name = Column(Unicode(255), nullable=False)
+    code = Column(Unicode(255), nullable=False, primary_key=True)
+    year = Column(Integer, nullable=False)
     orientation = Column(Unicode(255), nullable=True)
-    code = Column(Unicode(255), nullable=False)
     lecture_time = Column(Unicode(255), nullable=True)
     link_to_doc = Column(Unicode(255), nullable=True)
     area_id = Column(Integer, ForeignKey('areas.id'))
     department_id = Column(Integer, ForeignKey('deparments.id'))
-    year = Column(Integer, nullable=False)
 
     # Composiste attributes (w/rel to other tables).
     area = relationship("Area", uselist=False)
@@ -64,8 +80,8 @@ class Course(Base):
 class CoursePrerrequisites(Base):
   __tablename__ = 'course_prerrequisites'
   id = Column(Integer, primary_key=True, nullable=False)
-  course_id = Column(Integer, ForeignKey('courses.id'))
-  prerrequisite_id = Column(Integer, ForeignKey('courses.id'))
+  course_code = Column(Unicode(255), ForeignKey('courses.id'))
+  prerrequisite_code = Column(Unicode(255), ForeignKey('courses.id'))
   type = Column(String(1), nullable=False)
   completion_id = Column(Integer, ForeignKey('completion_status.id'))
 
@@ -110,7 +126,7 @@ class ClassMaterial(Base):
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(Text, nullable=False)
     description = Column(Text, nullable=False)
-    course_id = Column(Integer, ForeignKey('courses.id'))
+    course_code = Column(Integer, ForeignKey('courses.code'))
     contrib_types = Column(Text, nullable=False)
 
     files = relationship("File")
@@ -121,5 +137,5 @@ class CoursesStatus(Base):
 
     id = Column(Integer, primary_key=True, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'))
-    course_id = Column(Integer, ForeignKey('courses.id'))
+    course_code = Column(Integer, ForeignKey('courses.code'))
     completion_id = Column(Integer, ForeignKey('completion_status.id'))

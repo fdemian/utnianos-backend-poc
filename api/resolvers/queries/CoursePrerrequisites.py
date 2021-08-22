@@ -5,8 +5,8 @@ from os import path
 
 class CoursePrerrequisitesObj(graphene.ObjectType):
     id = graphene.Int()
-    course_id = graphene.Int()
-    prerrequisite_id = graphene.Int()
+    course_code = graphene.String()
+    prerrequisite_code = graphene.String()
     type = graphene.String()
     completion_id = graphene.Int()
 

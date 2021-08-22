@@ -5,7 +5,7 @@ from api.resolvers.queries.Courses import CourseObj
 from os import path
 
 class CareerPlanObj(graphene.ObjectType):
-    id = graphene.Int()
+    code = graphene.String()
     name = graphene.String()
     courses = graphene.List(graphene.NonNull(CourseObj))
 
@@ -22,6 +22,6 @@ def _resolve_career_plan(self, context, id):
     config_file = '../../../config.json'
     config_file_path = path.join(path.dirname(__file__), config_file)
     db_session = get_session(config_file_path)
-    career_plan = db_session.query(CareerPlan).filter(CareerPlan.id == id).one()
-    
+    career_plan = db_session.query(CareerPlan).filter(CareerPlan.code == id).one()
+
     return career_plan

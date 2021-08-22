@@ -15,7 +15,7 @@ class AddCareerPlan(graphene.Mutation):
     ok = graphene.Boolean()
 
     class Arguments:
-        planId = graphene.Int()
+        planId = graphene.String()
         userId = graphene.Int()
 
     def mutate(self, info, planId, userId):
@@ -25,7 +25,7 @@ class AddCareerPlan(graphene.Mutation):
 
         try:
 
-          plan_to_add = db_session.query(CareerPlan).filter(CareerPlan.id == planId).one()
+          plan_to_add = db_session.query(CareerPlan).filter(CareerPlan.code == planId).one()
           pending_status = db_session.query(CompletionStatus).filter(CompletionStatus.name == "Pendiente").one()
           user = db_session.query(User).filter(User.id == userId).one()
           user.career_plan = plan_to_add
@@ -34,7 +34,7 @@ class AddCareerPlan(graphene.Mutation):
           for course in plan_to_add.courses:
               status = CoursesStatus()
               status.user_id = user.id
-              status.course_id = course.id
+              status.course_code = course.code
               status.completion_id = pending_status.id
               db_session.add(status)
 

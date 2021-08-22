@@ -2,6 +2,7 @@ import argparse
 from api.scripts.add_user import add_user
 from api.dataloading.courses import load_courses
 from api.dataloading.career_plans import load_career_plans
+from api.dataloading.course_plans import associate_course_plans
 
 if __name__ == "__main__":
 
@@ -36,6 +37,11 @@ if __name__ == "__main__":
         command = load_career_plans
         prompt = "Do you wish to continue adding career plans?"
         command_heading = "Adding career plans."
+
+    if program_command == "CourseAssociations":
+        command = associate_course_plans
+        prompt = "Do you wish to continue adding career plan associations?"
+        command_heading = "Adding course associations."
 
 
     print(command_heading)
