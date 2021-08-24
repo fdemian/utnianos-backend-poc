@@ -125,6 +125,9 @@ Donde
   - courseRequisites: requisitos para cursar la materia. Array compuesto por
      + code: código de la materia correlativa.
      + status: estado de la materia, siendo uno de C (se require haberla cursado) ó F (se require tener final de la materia).
+  - finalRequisites: requisitos para dar final. Array compuesto por
+     + code: código de la materia correlativa.
+     + status: estado de la materia, siendo uno de C (se require haberla cursado) ó F (se require tener final de la materia).
 
 Por ejemplo (correlativas de Análisis de Sistemas):
 
