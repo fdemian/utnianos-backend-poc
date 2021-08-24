@@ -26,7 +26,7 @@ courses_plans = Table('career_plan_courses',
 class CoursesPlans(Base):
     __tablename__ = 'career_plan_courses'
     __table_args__ = {'extend_existing': True}
-    
+
     career_plan_code = Column(
       Unicode(255),
       ForeignKey('career_plans.code'),
@@ -80,10 +80,10 @@ class Course(Base):
 class CoursePrerrequisites(Base):
   __tablename__ = 'course_prerrequisites'
   id = Column(Integer, primary_key=True, nullable=False)
-  course_code = Column(Unicode(255), ForeignKey('courses.id'))
-  prerrequisite_code = Column(Unicode(255), ForeignKey('courses.id'))
+  course_code = Column(Unicode(255), ForeignKey('courses.code'))
+  prerrequisite_code = Column(Unicode(255), ForeignKey('courses.code'))
   type = Column(String(1), nullable=False)
-  completion_id = Column(Integer, ForeignKey('completion_status.id'))
+  completion_code = Column(Integer, ForeignKey('completion_status.status'))
 
 class CareerPlan(Base):
   __tablename__ = 'career_plans'
@@ -104,7 +104,7 @@ class Area(Base):
 
 class CompletionStatus(Base):
     __tablename__ = 'completion_status'
-    id = Column(Integer, primary_key=True, nullable=False)
+    status = Column(Unicode(255), primary_key=True, nullable=False)
     name = Column(Unicode(255), nullable=False)
 
 class ContribType(Base):
@@ -138,4 +138,4 @@ class CoursesStatus(Base):
     id = Column(Integer, primary_key=True, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'))
     course_code = Column(Integer, ForeignKey('courses.code'))
-    completion_id = Column(Integer, ForeignKey('completion_status.id'))
+    completion_code = Column(Integer, ForeignKey('completion_status.status'))

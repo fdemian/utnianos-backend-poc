@@ -7,15 +7,15 @@ from os import path
 class ChangeCourseStatus(graphene.Mutation):
 
     ok = graphene.Boolean()
-    course_id = graphene.Int()
-    status_id = graphene.Int()
+    course_code = graphene.String()
+    status_code = graphene.String()
 
     class Arguments:
-        course_id = graphene.Int()
+        course_code = graphene.String()
         user_id = graphene.Int()
-        status_id = graphene.Int()
+        status_code = graphene.String()
 
-    def mutate(self, info, course_id, user_id, status_id):
+    def mutate(self, info, course_code, user_id, status_code):
         config_file = '../../../config.json'
         config_file_path = path.join(path.dirname(__file__), config_file)
         db_session = get_session(config_file_path)
@@ -23,10 +23,10 @@ class ChangeCourseStatus(graphene.Mutation):
         try:
 
           status_to_change = db_session.query(CoursesStatus).filter(
-             CoursesStatus.course_id == course_id,
+             CoursesStatus.course_code == course_code,
              CoursesStatus.user_id == user_id
           ).one()
-          status_to_change.completion_id = status_id
+          status_to_change.completion_code = status_code
 
           db_session.add(status_to_change)
           db_session.commit()
@@ -39,6 +39,6 @@ class ChangeCourseStatus(graphene.Mutation):
 
         return ChangeCourseStatus(
            ok=True,
-           course_id=course_id,
-           status_id=status_id
+           course_code=course_code,
+           status_code=status_code
         )

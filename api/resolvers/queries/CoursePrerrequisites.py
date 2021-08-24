@@ -8,8 +8,7 @@ class CoursePrerrequisitesObj(graphene.ObjectType):
     course_code = graphene.String()
     prerrequisite_code = graphene.String()
     type = graphene.String()
-    completion_id = graphene.Int()
-
+    completion_code = graphene.String()
 
 def resolve_prerreq_objects(self, context):
     config_file = '../../../config.json'

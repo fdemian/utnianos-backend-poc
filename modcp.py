@@ -3,6 +3,7 @@ from api.scripts.add_user import add_user
 from api.dataloading.courses import load_courses
 from api.dataloading.career_plans import load_career_plans
 from api.dataloading.course_plans import associate_course_plans
+from api.dataloading.prerrequisites import load_prerrequisites
 
 if __name__ == "__main__":
 
@@ -43,6 +44,10 @@ if __name__ == "__main__":
         prompt = "Do you wish to continue adding career plan associations?"
         command_heading = "Adding course associations."
 
+    if program_command == "Prerrequisites":
+        command = load_prerrequisites
+        prompt = "Do you wish to continue adding prerrequisites?"
+        command_heading = "Adding course associations."
 
     print(command_heading)
     print("====================================")

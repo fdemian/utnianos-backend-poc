@@ -7,7 +7,7 @@ class CoursesStatusObj(graphene.ObjectType):
     id = graphene.Int()
     user_id = graphene.Int()
     course_code = graphene.String()
-    completion_id = graphene.Int()
+    completion_code = graphene.String()
 
 def _resolve_courses_status_id(self, context, id):
     config_file = '../../../config.json'

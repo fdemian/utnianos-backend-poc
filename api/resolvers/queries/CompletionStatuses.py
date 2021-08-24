@@ -4,7 +4,7 @@ from api.models.models import CompletionStatus
 from os import path
 
 class CompletionStatusObj(graphene.ObjectType):
-    id = graphene.Int()
+    status = graphene.String()
     name = graphene.String()
 
 def _resolve_completion_statuses(self, context):
