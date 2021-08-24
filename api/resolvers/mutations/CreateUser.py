@@ -1,6 +1,6 @@
 import graphene
 from api.models.sessionHelper import get_session
-from api.models.models import User
+from api.models.models import User, db_session
 from api.scripts.add_user import do_save_user
 from os import path
 
@@ -15,9 +15,6 @@ class CreateUser(graphene.Mutation):
         password = graphene.String()
 
     def mutate(self, info, username, email, password):
-        config_file = '../../../config.json'
-        config_file_path = path.join(path.dirname(__file__), config_file)
-        db_session = get_session(config_file_path)
 
         #Check that the username does not already exist.
         user_exists = db_session.query(User).filter(User.username == username).first() is not None

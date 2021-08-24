@@ -8,7 +8,6 @@ from flask import (
     send_from_directory
 )
 from werkzeug.utils import secure_filename
-from api.models.sessionHelper import get_session
 
 # upload_folder = app.config['UPLOAD_FOLDER']
 UPLOAD_FOLDER = 'fileuploads'

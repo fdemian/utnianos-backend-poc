@@ -19,6 +19,8 @@ app.config['UPLOAD_FOLDER'] = "/fileuploads"
 app.config['SECRET_KEY'] = settings['jwt']['secret']
 app.config["JWT_SECRET_KEY"] = settings['jwt']['secret']
 app.config["JWT_REFRESH_TOKEN_EXPIRES"] = int(settings['jwt']['expiration'])
+#app.config['DATABASE_SESSION'] = db_session
+
 auth = GraphQLAuth(app)
 
 @app.route('/api/uploads?name=<name>', methods=['GET', 'POST'])

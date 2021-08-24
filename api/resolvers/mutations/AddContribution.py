@@ -1,7 +1,11 @@
 import graphene
 from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
-from api.models.sessionHelper import get_session
-from api.models.models import ClassMaterial, Course, File
+from api.models.models import (
+  ClassMaterial,
+  Course,
+  File,
+  db_session
+ )
 from api.scripts.add_user import do_save_user
 from os import path
 
@@ -22,10 +26,6 @@ class AddContribution(graphene.Mutation):
         files_list = graphene.List(FileParam)
 
     def mutate(self, info, title, description, types, course, files_list):
-        config_file = '../../../config.json'
-        config_file_path = path.join(path.dirname(__file__), config_file)
-
-        db_session = get_session(config_file_path)
 
         try:
           course_obj = db_session.query(Course).filter(Course.name == course).one()

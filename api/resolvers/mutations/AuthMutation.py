@@ -10,8 +10,7 @@ from flask_graphql_auth import (
     mutation_jwt_required
 )
 from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
-from api.models.sessionHelper import get_session
-from api.models.models import User #, UserActivation
+from api.models.models import User, db_session #, UserActivation
 from api.utils.utils import (delay_time, parse_config_file)
 from api.utils.crypto import check_password, hash_password
 from api.utils.auth import get_user_token
@@ -22,7 +21,6 @@ def get_context(config_path):
     config_file = '../../../config.json'
     config_file_path = path.join(path.dirname(__file__), config_file)
     settings = parse_config_file(config_file_path)
-    db_session = get_session(config_file_path)
 
     return {
       'settings': settings,

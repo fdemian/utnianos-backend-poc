@@ -1,7 +1,6 @@
 import graphene
 from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
-from api.models.sessionHelper import get_session
-from api.models.models import CoursesStatus
+from api.models.models import CoursesStatus, db_session
 from os import path
 
 class ChangeCourseStatus(graphene.Mutation):
@@ -16,10 +15,6 @@ class ChangeCourseStatus(graphene.Mutation):
         status_code = graphene.String()
 
     def mutate(self, info, course_code, user_id, status_code):
-        config_file = '../../../config.json'
-        config_file_path = path.join(path.dirname(__file__), config_file)
-        db_session = get_session(config_file_path)
-
         try:
 
           status_to_change = db_session.query(CoursesStatus).filter(

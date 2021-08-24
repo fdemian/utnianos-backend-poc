@@ -1,7 +1,6 @@
 import graphene
 from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
-from api.models.sessionHelper import get_session
-from api.models.models import User #, UserActivation
+from api.models.models import User, db_session #, UserActivation
 from api.utils.utils import (delay_time, parse_config_file)
 from api.utils.crypto import check_password, hash_password
 from api.utils.auth import get_user_token
@@ -21,9 +20,6 @@ class UserObject(graphene.ObjectType):
       careerPlan = graphene.Field(CareerPlanObj)
 
 def resolve_user_id(self, info, id):
-        config_file = '../../../config.json'
-        config_file_path = path.join(path.dirname(__file__), config_file)
-        db_session = get_session(config_file_path)
         user = get_user_if_exists(db_session, id)
 
         if not user:
