@@ -31,7 +31,7 @@ def upgrade():
     op.drop_column('course_prerrequisites', 'prerrequisite_id')
     op.drop_column('course_prerrequisites', 'course_id')
     op.drop_column('career_plan_courses', 'career_plan_id')
-    op.drop_column('career_plan_courses', 'course_id')
+    #op.drop_column('career_plan_courses', 'course_id')
     op.drop_column('class_materials', 'course_id')
 
     # Courses status.
