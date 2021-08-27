@@ -39,8 +39,6 @@ class AddContribution(graphene.Mutation):
           cm_id = course_material.id
 
           for file in files_list:
-              print(file.url)
-              print(file.type)
               file_to_save = File()
               file_to_save.path = file.url
               file_to_save.type = file.type
