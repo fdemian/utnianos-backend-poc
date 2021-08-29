@@ -31,6 +31,7 @@ class AuthMutation(graphene.Mutation):
     access_token = graphene.String()
     refresh_token = graphene.String()
     id = graphene.Int()
+    ok = graphene.Boolean()
 
     class Arguments:
         username = graphene.String()
@@ -43,8 +44,14 @@ class AuthMutation(graphene.Mutation):
         user = try_login_user(username, password, context)
 
         if not user:
-            raise Exception('Authenication Failure : User is not registered')
+            return AuthMutation(
+               ok=False,
+               id=None,
+               access_token="",
+               refresh_token=""
+            )
         return AuthMutation(
+            ok=True,
             id=user['user']['id'],
             access_token = create_access_token(username),
             refresh_token = create_refresh_token(username)
@@ -160,7 +167,7 @@ def authenticate_user(username, password, context):
     if user is None:
         #logger.info("Requested unexistent user: " + username)
         user = get_mock_user()
-        hash_password(user.password, '')
+        hash_password(user.password, b'')
         user_exists = False
     else:
         #logger.info("User exists and is: " + username)

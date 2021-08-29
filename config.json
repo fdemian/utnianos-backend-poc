@@ -10,7 +10,7 @@
     "description": "This page is amazing!"
   },
   "serverConfig": {
-    "port":"8888",
+    "port":"5000",
     "notifications_limit": "8",
     "notifications_enabled": "True"
   },
