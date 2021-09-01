@@ -46,15 +46,4 @@ def upgrade():
     )
 
 def downgrade():
-    op.drop_constraint('plans_unique_code', 'career_plans')
-    op.drop_column('users', 'career_plan_code')
-    op.drop_column('career_plan_courses', 'career_plan_code')
-    op.drop_column('career_plans', 'code')
-
-    # TODO
-    """
-     op.drop_column('career_plan_courses', 'course_id')
-     op.drop_column('users', 'career_plan_id')
-     op.drop_constraint('career_plan_courses_career_plan_id_fkey', 'career_plan_courses')
-     op.drop_column('career_plans', 'id', ondelete='CASCADE')
-    """
+    op.create_unique_constraint('career_plan_courses_career_plan_id_fkey', 'career_plans', ['id'])

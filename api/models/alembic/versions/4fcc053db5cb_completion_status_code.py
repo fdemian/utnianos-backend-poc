@@ -58,16 +58,18 @@ def upgrade():
 
 def downgrade():
 
-    op.drop_column('completion_status', 'status')
     op.add_column('completion_status',
       sa.Column('id',
         sa.Integer,
         primary_key=True
       )
     )
+    
+    op.drop_constraint('course_prerrequisites_completion_code_fkey', 'course_prerrequisites')
+    op.drop_constraint('courses_status_completion_code_fkey', 'courses_status')
+    op.drop_constraint('pk_completion_status', 'completion_status')
     op.create_primary_key('pk_completion_id', 'completion_status', ['id'])
 
-    op.drop_column('courses_status', 'completion_code')
     op.add_column('courses_status',
      sa.Column('completion_id',
         sa.Integer,
@@ -76,7 +78,6 @@ def downgrade():
      )
     )
 
-    op.drop_column('course_prerrequisites', 'completion_code')
     op.add_column('course_prerrequisites',
      sa.Column('completion_id',
         sa.Integer,
@@ -84,3 +85,7 @@ def downgrade():
         nullable=False
      )
     )
+
+    op.drop_column('courses_status', 'completion_code')
+    op.drop_column('completion_status', 'status')
+    op.drop_column('course_prerrequisites', 'completion_code')
