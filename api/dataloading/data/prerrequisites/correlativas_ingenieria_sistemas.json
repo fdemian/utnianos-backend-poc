@@ -1,0 +1,589 @@
+[
+  {
+  		"code": "082024",
+  		"courseRequisites": [{
+  				"code": "082023",
+  				"status": "C"
+  			},
+  			{
+  				"code": "082021",
+  				"status": "C"
+  			}
+  		],
+  		"finalRequisites": [{
+  				"code": "082023",
+  				"status": "F"
+  			},
+  			{
+  				"code": "082021",
+  				"status": "F"
+  			}
+  		]
+  	},
+  	{
+  		"code": "950703",
+  		"courseRequisites": [{
+  				"code": "950701",
+  				"status": "C"
+  			},
+  			{
+  				"code": "950702",
+  				"status": "C"
+  			}
+  		],
+  		"finalRequisites": [{
+  				"code": "950701",
+  				"status": "F"
+  			},
+  			{
+  				"code": "950702",
+  				"status": "F"
+  			}
+  		]
+  	},
+  	{
+  		"code": "950704",
+  		"courseRequisites": [{
+  				"code": "950701",
+  				"status": "C"
+  			},
+  			{
+  				"code": "950702",
+  				"status": "C"
+  			}
+  		],
+  		"finalRequisites": [{
+  				"code": "950701",
+  				"status": "F"
+  			},
+  			{
+  				"code": "950702",
+  				"status": "F"
+  			}
+  		]
+  	},
+  	{
+  		"code": "082025",
+  		"courseRequisites": [{
+  				"code": "082020",
+  				"status": "C"
+  			},
+  			{
+  				"code": "082021",
+  				"status": "C"
+  			}
+  		],
+  		"finalRequisites": [{
+  				"code": "082020",
+  				"status": "F"
+  			},
+  			{
+  				"code": "082021",
+  				"status": "F"
+  			}
+  		]
+  	},
+  	{
+  		"code": "082026",
+  		"courseRequisites": [{
+  				"code": "082020",
+  				"status": "C"
+  			},
+  			{
+  				"code": "082021",
+  				"status": "C"
+  			}
+  		],
+  		"finalRequisites": [{
+  				"code": "082020",
+  				"status": "F"
+  			},
+  			{
+  				"code": "082021",
+  				"status": "F"
+  			}
+  		]
+  	},
+  	{
+  		"code": "082028",
+  		"courseRequisites": [{
+  				"code": "082024",
+  				"status": "C"
+  			},
+  			{
+  				"code": "082026",
+  				"status": "C"
+  			},
+  			{
+  				"code": "082020",
+  				"status": "F"
+  			},
+  			{
+  				"code": "082021",
+  				"status": "F"
+  			},
+  			{
+  				"code": "082023",
+  				"status": "F"
+  			}
+  		],
+  		"finalRequisites": [{
+  				"code": "082024",
+  				"status": "F"
+  			},
+  			{
+  				"code": "082026",
+  				"status": "F"
+  			}
+  		]
+  	},
+  	{
+  		"code": "082030",
+  		"courseRequisites": [{
+  				"code": "082024",
+  				"status": "C"
+  			},
+  			{
+  				"code": "082025",
+  				"status": "C"
+  			},
+  			{
+  				"code": "082026",
+  				"status": "C"
+  			},
+  			{
+  				"code": "082020",
+  				"status": "F"
+  			},
+  			{
+  				"code": "082021",
+  				"status": "F"
+  			},
+  			{
+  				"code": "082023",
+  				"status": "F"
+  			}
+  		],
+  		"finalRequisites": [{
+  				"code": "082024",
+  				"status": "F"
+  			},
+  			{
+  				"code": "082025",
+  				"status": "F"
+  			},
+  			{
+  				"code": "082026",
+  				"status": "F"
+  			}
+  		]
+  	},
+  	{
+  		"code": "082027",
+  		"courseRequisites": [{
+  				"code": "082020",
+  				"status": "C"
+  			},
+  			{
+  				"code": "082021",
+  				"status": "C"
+  			},
+  			{
+  				"code": "082022",
+  				"status": "C"
+  			}
+  		],
+  		"finalRequisites": [{
+  				"code": "082020",
+  				"status": "F"
+  			},
+  			{
+  				"code": "082021",
+  				"status": "F"
+  			},
+  			{
+  				"code": "082022",
+  				"status": "F"
+  			}
+  		]
+  	},
+  	{
+  		"code": "951603",
+  		"courseRequisites": [{
+  			"code": "951602",
+  			"status": "C"
+  		}],
+  		"finalRequisites": [{
+  			"code": "951602",
+  			"status": "F"
+  		}]
+  },
+  {
+		"code": "950606",
+		"courseRequisites": [
+      { "code": "950701", "status": "C" },
+      { "code": "950605", "status": "C" }
+    ],
+    "finalRequisites": [
+      { "code": "950701", "status": "F" },
+      { "code": "950605", "status": "F" }
+    ]
+  },
+  {
+		"code": "082032",
+		"courseRequisites": [
+      { "code": "950703", "status": "C" },
+      { "code": "950702", "status": "F" },
+      { "code": "950701", "status": "F" }
+    ],
+    "finalRequisites": [
+      { "code": "950703", "status": "F" }
+    ]
+  },
+  {
+    "code": "082033",
+    "courseRequisites": [
+      { "code": "082028", "status": "C" },
+      { "code": "082027", "status": "C" },
+      { "code": "950309", "status": "C" },
+      { "code": "082022", "status": "F" },
+      { "code": "951602", "status": "F" },
+      { "code": "082024", "status": "F" },
+      { "code": "082026", "status": "F" }
+    ],
+    "finalRequisites": [
+      { "code": "082028", "status": "F" },
+      { "code": "082027", "status": "F" },
+      { "code": "950309", "status": "F" }
+    ]
+  },
+  {
+    "code": "082038",
+    "courseRequisites": [
+      { "code": "082028", "status": "C" },
+      { "code": "082030", "status": "C" },
+      { "code": "950704", "status": "C" },
+      { "code": "082024", "status": "F" },
+      { "code": "082025", "status": "F" },
+      { "code": "082026", "status": "F" }
+    ],
+    "finalRequisites": [
+      { "code": "082028", "status": "F" },
+      { "code": "082030", "status": "F" },
+      { "code": "950704", "status": "F" }
+    ]
+  },
+  {
+    "code": "082036",
+    "courseRequisites": [
+      { "code": "081420", "status": "C" },
+      { "code": "082032", "status": "C" },
+      { "code": "950703", "status": "F" },
+      { "code": "950606", "status": "F" }
+    ],
+    "finalRequisites": [
+      { "code": "081420", "status": "F" },
+      { "code": "082032", "status": "F" }
+    ]
+  },
+  {
+    "code": "082029",
+    "courseRequisites": [
+      { "code": "082022", "status": "C" },
+      { "code": "950703", "status": "C" },
+      { "code": "950606", "status": "C" },
+      { "code": "950701", "status": "F" },
+      { "code": "950702", "status": "F" },
+      { "code": "950605", "status": "F" }
+    ],
+    "finalRequisites": [
+      { "code": "082022", "status": "F" },
+      { "code": "950703", "status": "F" },
+      { "code": "950606", "status": "F" }
+    ]
+  },
+  {
+    "code": "082031",
+    "courseRequisites": [
+      { "code": "082027", "status": "C" },
+      { "code": "082029", "status": "C" },
+      { "code": "082020", "status": "F" },
+      { "code": "082021", "status": "F" },
+      { "code": "082022", "status": "F" },
+      { "code": "950606", "status": "F" },
+      { "code": "950703", "status": "F" }
+    ],
+    "finalRequisites": [
+      { "code": "082027", "status": "F" },
+      { "code": "082029", "status": "F" }
+    ]
+  },
+  {
+    "code": "082034",
+    "courseRequisites": [
+      { "code": "950704", "status": "C" },
+      { "code": "082032", "status": "C" },
+      { "code": "950703", "status": "F" }
+    ],
+    "finalRequisites": [
+      { "code": "950704", "status": "F" },
+      { "code": "082032", "status": "F" }
+    ]
+  },
+  {
+    "code": "082041",
+    "courseRequisites": [
+      { "code": "950704", "status": "C" },
+      { "code": "082032", "status": "C" },
+      { "code": "950703", "status": "F" }
+    ],
+    "finalRequisites": [
+      { "code": "950704", "status": "F" },
+      { "code": "082032", "status": "F" }
+    ]
+  },
+  {
+   "code": "082040",
+   "courseRequisites": [
+     { "code": "082034", "status": "C" },
+     { "code": "082041", "status": "C" },
+     { "code": "950704", "status": "F" },
+     { "code": "082028", "status": "F" },
+     { "code": "082032", "status": "F" }
+   ],
+   "finalRequisites": [
+     { "code": "082034", "status": "F" },
+     { "code": "082041", "status": "F" }
+   ]
+ },
+ {
+   "code": "082039",
+   "courseRequisites": [
+     { "code": "082033", "status": "C" },
+     { "code": "082034", "status": "C" },
+     { "code": "082027", "status": "F" },
+     { "code": "950704", "status": "F" },
+     { "code": "082028", "status": "F" },
+     { "code": "082032", "status": "F" },
+     { "code": "950309", "status": "F" }
+   ],
+   "finalRequisites": [
+     { "code": "082033", "status": "F" },
+     { "code": "082034", "status": "F" }
+    ]
+ },
+ {
+   "code": "082035",
+   "courseRequisites": [
+     { "code": "082033", "status": "C" },
+     { "code": "082034", "status": "C" },
+     { "code": "082041", "status": "C" },
+     { "code": "950704", "status": "F" },
+     { "code": "082028", "status": "F" },
+     { "code": "082027", "status": "F" },
+     { "code": "082032", "status": "F" },
+     { "code": "950309", "status": "F" }
+   ],
+   "finalRequisites": [
+     { "code": "082033", "status": "F" },
+     { "code": "082034", "status": "F" },
+     { "code": "082041", "status": "F" }
+   ]
+ },
+ {
+   "code": "082037",
+   "courseRequisites": [
+     { "code": "082033", "status": "C" },
+     { "code": "950310", "status": "C" },
+     { "code": "082031", "status": "C" },
+     { "code": "082038", "status": "C" },
+     { "code": "950704", "status": "F" },
+     { "code": "082028", "status": "F" },
+     { "code": "082027", "status": "F" },
+     { "code": "951604", "status": "F" },
+     { "code": "950309", "status": "F" },
+     { "code": "951601", "status": "F" },
+     { "code": "082030", "status": "F" },
+     { "code": "951603", "status": "F" },
+     { "code": "082029", "status": "F" }
+   ],
+   "finalRequisites": [
+     {
+       "code": "950702",
+       "status": "F"
+
+     },
+     {
+       "code": "950701",
+       "status": "F"
+
+     },
+     {
+       "code":"082020",
+       "status": "F"
+
+     },
+     {
+       "code":"082021",
+       "status": "F"
+
+     },
+     {
+       "code":"082022",
+       "status": "F"
+
+     },
+     {
+       "code":"082023",
+       "status": "F"
+
+     },
+     {
+       "code": "081420",
+       "status": "F"
+
+     },
+     {
+       "code": "951604",
+       "status": "F"
+
+     },
+     {
+       "code":"082024",
+       "status": "F"
+
+     },
+     {
+       "code":"951601",
+       "status": "F"
+
+     },
+     {
+       "code":"950703",
+       "status": "F"
+
+     },
+     {
+       "code": "082025",
+       "status": "F"
+
+     },
+     {
+       "code": "950605",
+       "status": "F"
+
+     },
+     {
+       "code": "082026",
+       "status": "F"
+
+     },
+     {
+       "code":"951602",
+       "status": "F"
+
+     },
+     {
+       "code": "950704",
+       "status": "F"
+
+     },
+     {
+       "code": "082028",
+       "status": "F"
+
+     },
+     {
+       "code": "082027",
+       "status": "F"
+
+     },
+     {
+       "code": "950606",
+       "status": "F"
+
+     },
+     {
+       "code": "950309",
+       "status": "F"
+
+     },
+     {
+       "code": "082030",
+       "status": "F"
+
+     },
+     {
+       "code": "951603",
+       "status": "F"
+
+     },
+     {
+       "code": "082032",
+       "status": "F"
+
+     },
+     {
+       "code": "950310",
+       "status": "F"
+
+     },
+     {
+       "code": "082033",
+       "status": "F"
+
+     },
+     {
+       "code": "082038",
+       "status": "F"
+
+     },
+     {
+       "code": "082036",
+       "status": "F"
+
+     },
+     {
+       "code": "082029",
+       "status": "F"
+
+     },
+     {
+       "code": "082031",
+       "status": "F"
+
+     },
+     {
+       "code": "082034",
+       "status": "F"
+
+     },
+     {
+       "code": "082041",
+       "status": "F"
+
+     },
+     {
+       "code": "082037",
+       "status": "F"
+
+     },
+     {
+       "code": "082040",
+       "status": "F"
+
+     },
+     {
+       "code": "082039",
+       "status": "F"
+
+     },
+     {
+       "code": "082035",
+       "status": "F"
+
+     }
+   ]
+ }
+
+]
