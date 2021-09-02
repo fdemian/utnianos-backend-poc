@@ -216,5 +216,44 @@
 			"code": "951602",
 			"status": "F"
 		}]
+	},
+	{
+	   "code": "082098",
+	   "courseRequisites": [
+		  { "code": "950703", "status": "C" },
+		  { "code": "950702", "status": "F" },
+		  { "code": "950701", "status": "F" },
+		  { "code": "082022", "status": "F" },
+		  { "code": "950605", "status": "F" }
+	   ],
+	   "finalRequisites": [
+	     { "code": "082027", "status": "F" },
+		   { "code": "950703", "status": "F" }
+	   ]
+	  },
+	  {
+	    "code": "K08-INT-HABPROF",
+	     "courseRequisites": [
+		  { "code": "082028", "status": "C" },
+		  { "code": "082030", "status": "C" },
+		  { "code": "082098", "status": "C" },
+		  { "code": "082024", "status": "F" },
+		  { "code": "082025", "status": "F" },
+		  { "code": "950703", "status": "F" },
+		  { "code": "082026", "status": "F" },
+	    { "code": "082027", "status": "F" },
+		  { "code": "951603", "status": "F" }
+	   ],
+	   "finalRequisites": [
+	 	  {"code": "082028", "status": "C" },
+		  {"code": "082030", "status": "C" },
+		  {"code": "082098", "status": "C" },
+		  {"code": "082024", "status": "F" },
+		  {"code": "082025", "status": "F" },
+		  {"code": "950703", "status": "F" },
+		  {"code": "082026", "status": "F" },
+	    { "code": "082027", "status": "F" },
+		  { "code": "951603", "status": "F" }
+	   ]
 	}
 ]
